@@ -527,6 +527,7 @@ void ekinSkills() {
 	alignWithTapeSpeed(-60, -60);
 
 	//Back Up
+	globalMaxSpeed = 80;
 	moveMotors(-200,-200);
 	moveMotors(250,-250);
 	moveMotors(-660,-660);
