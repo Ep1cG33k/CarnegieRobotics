@@ -482,36 +482,39 @@ void ekinSkills() {
 	moveMotors(-90, -90);
 	//Turn towards mogo (Old: -155, 155)
 	globalMaxSpeed = 70;
-	moveMotors(-280,280);
+	moveMotors(-290,290);
 	globalMaxSpeed = 80;
 
 	//Move forwards to scoop mogo
-	moveMotors(305,305);
+	moveMotors(330,330);
+	leftMotor(20);
+	rightMotor(20);
 	startTask(frontUp);
-	delay(700);
+	delay(1300);
 	startTask(backDown);
 	globalAccuracy = 40;
-	moveMotors(-910, -910);
+	moveMotors(-1200, -1200);
 	startTask(backUp);
 	delay(700);
 
 	globalAccuracy = 5;
 	moveMotors(310,-310);
 	// Go to Red 5pt Right
-	moveMotors(-1200, -1200);
+	moveMotors(-1120, -1120);
 	leftMotor(-30);
 	rightMotor(-30);
 	startTask(backDown);
 	delay(1000);
-	globalMaxSpeed = 80;
+	globalMaxSpeed = 55;
 	delay(1000);
 	moveMotors(500, 500);
 
 	//Rotate To Front
+	startTask(backUp);
 	moveMotors(510, -510);
-	moveMotors(405, 405);
+	moveMotors(390, 390);
 	leftMotor(36);
-	rightMotor(28);
+	rightMotor(18);
 	delay(3000);
 
 	//Ram
@@ -519,8 +522,18 @@ void ekinSkills() {
 	ramFront(1300);
 
 	//Back and Correct
-	moveMotors(-500, -500);
+	moveMotors(-510, -510);
+	globalMaxSpeed=45;
 	alignWithTapeSpeed(-60, -60);
+	moveMotors(-150,-150);
+	moveMotors(250,-250);
+	moveMotors(-660,-660);
+	leftMotor(-18);
+	rightMotor(-36);
+	delay(2000);
+
+
+
 	// Move First Cones Away
 	/*globalMaxSpeed = 60;
 	moveMotors(1710, 1710);
