@@ -40,18 +40,18 @@
 
 void pre_auton()
 {
-  // Set bStopTasksBetweenModes to false if you want to keep user created tasks
-  // running between Autonomous and Driver controlled modes. You will need to
-  // manage all user created tasks if set to false.
-  bStopTasksBetweenModes = true;
+	// Set bStopTasksBetweenModes to false if you want to keep user created tasks
+	// running between Autonomous and Driver controlled modes. You will need to
+	// manage all user created tasks if set to false.
+	bStopTasksBetweenModes = true;
 
 	// Set bDisplayCompetitionStatusOnLcd to false if you don't want the LCD
 	// used by the competition include file, for example, you might want
 	// to display your team name on the LCD in this function.
 	// bDisplayCompetitionStatusOnLcd = false;
 
-  // All activities that occur before the competition starts
-  // Example: clearing encoders, setting servo positions, ...
+	// All activities that occur before the competition starts
+	// Example: clearing encoders, setting servo positions, ...
 }
 
 /*---------------------------------------------------------------------------*/
@@ -66,12 +66,12 @@ void pre_auton()
 
 task autonomous()
 {
-  // ..........................................................................
-  // Insert user code here.
-  // ..........................................................................
+	// ..........................................................................
+	// Insert user code here.
+	// ..........................................................................
 
-  // Remove this function call once you have "real" code.
-  AutonomousCodePlaceholderForTesting();
+	// Remove this function call once you have "real" code.
+	AutonomousCodePlaceholderForTesting();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -90,29 +90,30 @@ task liftFront() {
 
 		if (vexRT[Btn5U]) {
 			motor[port2] = 127;
-			fr = true;
-		} else if (vexRT[Btn7D]) {
+			} else if (vexRT[Btn7D]) {
 			motor[port2] = -70;
-			fr = true;
-		} else if (vexRT[Btn5D]) {
-			while(!SensorValue[frontLift]) {
-				motor[port2] = -127
-			}
-			motor[port2] = -50;
-			delay(60);
-			motor[port2] = -25;
-			delay(60);
-			motor[port2] = -10;
-			fr = false;
-			while(vexRT[Btn5D]){};
-		} else {
-			if (fr) {
-				motor[port2] = 0;
+			} else if (vexRT[Btn5D]) {
+			motor[port2] = -127;
 			} else {
-				motor[port2] = -10;
-			}
+			motor[port2] = 0;
 		}
 
+		/*if (vexRT[Btn5U]) {
+		motor[port2] = 127;
+		fr = true;
+		} else if (vexRT[Btn7D]) {
+		motor[port2] = -70;
+		fr = true;
+		} else if (vexRT[Btn5D]) {
+		motor[port2] = -127
+		fr = false;
+		while(vexRT[Btn5D]){};
+		} else {
+		if (fr) {
+		motor[port2] = 0;
+		} else {
+		motor[port2] = -10;
+		}*/
 	}
 
 }
@@ -122,19 +123,11 @@ task liftBack() {
 
 		if (vexRT[Btn6U]) {
 			motor[port3] = 127;
-		} else if (vexRT[Btn8D]) {
+			} else if (vexRT[Btn8D]) {
 			motor[port3] = -70;
-		} else if (vexRT[Btn6D]) {
-			while(!SensorValue[backLift]) {
-				motor[port3] = -127;
-			}
-			motor[port3] = -50;
-			delay(60);
-			motor[port3] = -25;
-			delay(60);
-			motor[port3] = 0;
-			while(vexRT[Btn6D]){};
-		} else {
+			} else if (vexRT[Btn6D]) {
+			motor[port3] = -127;
+			} else {
 			motor[port3] = 0;
 		}
 
@@ -194,10 +187,10 @@ task DsensorVal() {
 }
 
 void leftMotor(int power) {
-		motor[port1] = motor[port4] = motor[port5] = motor[port6] = power;
+	motor[port1] = motor[port4] = motor[port5] = motor[port6] = power;
 }
 void rightMotor(int power) {
-		motor[port7] = motor[port8] = motor[port9] = motor[port10] = -power;
+	motor[port7] = motor[port8] = motor[port9] = motor[port10] = -power;
 }
 
 void PIDTest() {
@@ -220,13 +213,13 @@ void PIDTest() {
 
 		if (abs(errorL) < 20) {
 			erTleft += errorL;
-		} else {
+			} else {
 			erTleft = 0;
 		}
 
 		if (abs(errorR) < 20) {
 			erTright += errorR;
-		} else {
+			} else {
 			erTright = 0;
 		}
 
@@ -299,13 +292,13 @@ void moveMotors(int leftTarget, int rightTarget) {
 
 		if (abs(errorL) < 20) {
 			erTleft += errorL;
-		} else {
+			} else {
 			erTleft = 0;
 		}
 
 		if (abs(errorR) < 20) {
 			erTright += errorR;
-		} else {
+			} else {
 			erTright = 0;
 		}
 
@@ -364,6 +357,17 @@ task frontDown() {
 	motor[mFrontLift] = -10;
 }
 
+task frontDownDelay() {
+	motor[mFrontLift] = -100;
+	delay(1100);
+	motor[mFrontLift] = -10;
+}
+
+task backDownDelay() {
+	motor[mBackLift] = -100;
+	delay(1100);
+	motor[mBackLift] = -10;
+}
 task backUp() {
 	motor[mBackLift] = 100;
 	delay(1100);
@@ -391,7 +395,7 @@ void ramBack(int de) {
 	leftMotor(0);
 	rightMotor(0);
 }
-int globalLSThreshold = 2890;
+int globalLSThreshold = 2800;
 void alignWithTapeSpeed(int l, int r) {
 	leftMotor(l);
 	rightMotor(r);
@@ -497,7 +501,7 @@ void ekinSkills() {
 	startTask(backUp);
 	delay(700);
 
-	globalAccuracy = 5;
+	/*globalAccuracy = 5;
 	moveMotors(310,-310);
 	// Go to Red 5pt Right
 	moveMotors(-1120, -1120);
@@ -559,67 +563,140 @@ void ekinSkills() {
 	moveMotors(1070, 1050);
 	startTask(frontDown);*/
 
-
-
-
-
-
-
-
-
 }
 
 
+void legitSkills(){
+	globalAccuracy = 3;
+	globalMaxSpeed = 80;
+
+	//Get Past First Line
+	moveMotors(410,410);
+	//Ram Into Tape
+	alignWithTapeSpeed(30, 30);
+
+	startTask(frontDownDelay);
+	//Turn towards yellow cones (Old 100, -130)
+	moveMotors(0, -240);
+	//Push cones
+	moveMotors(780, 780);
+	//Back up
+	startTask(frontUp);
+	moveMotors(-90, -90);
+	//Turn towards mogo (Old: -155, 155)
+	globalMaxSpeed = 70;
+	moveMotors(-290,290);
+	startTask(frontDownDelay);
+	moveMotors(-200,-200);
+
+	globalMaxSpeed = 80;
+
+	//Move forwards to scoop mogo
+	//moveMotors(350,350);
+	leftMotor(90);
+	rightMotor(90);
+	delay(800);
+	leftMotor(10);
+	rightMotor(10);
+	startTask(frontUp);
+	delay(1300);
+	startTask(backDownDelay);
+	globalAccuracy = 40;
+	moveMotors(-1100, -1100);
+	startTask(backUp);
+	delay(700);
 
 
+	globalAccuracy = 5;
+	moveMotors(310,-310);
+	// Go to Red 5pt Right
+	moveMotors(-1120, -1120);
+	leftMotor(-30);
+	rightMotor(-30);
+	startTask(backDownDelay);
+	delay(1000);
+	globalMaxSpeed = 55;
+	delay(1000);
+	moveMotors(500, 500);
+/*
+	//Rotate To Front
+	startTask(backUp);
+	moveMotors(510, -510);
+	moveMotors(390, 390);
+	leftMotor(36);
+	rightMotor(18);
+	delay(3000);
 
+	//Ram
+	moveMotors(-400, -400);
+	ramFront(1300);
+
+	//Back and Correct
+	moveMotors(-510, -510);
+	globalMaxSpeed=45;
+	alignWithTapeSpeed(-60, -60);
+
+	//Back Up
+	globalMaxSpeed = 80;
+	moveMotors(-200,-200);
+	moveMotors(250,-250);
+	moveMotors(-660,-660);
+	leftMotor(-18);
+	rightMotor(-36);
+	delay(2000); */
+}
 
 task usercontrol()
 {
 	bool driveMode = true;
-  // User control code here, inside the loop
+	// User control code here, inside the loop
 	//startTask(liftFront);
-//	startTask(liftBack);
+	//	startTask(liftBack);
 	startTask(BlinkGreen);
 	startTask(BlinkRed);
 	startTask(DsensorVal);
-  while (true)
-  {
+	while (true)
+	{
 
 		SensorValue[yellow1] = SensorValue[frontLift];
 		SensorValue[yellow2] = SensorValue[backLift];
-  	if (driveMode) {
-	  //	motor[port1] = motor[port4] = motor[port5] = motor[port6] = vexRT[Ch3] + vexRT[Ch1];
-  	//	motor[port7] = motor[port8] = motor[port9] = motor[port10] = -vexRT[Ch3] + vexRT[Ch1];
-  	} else {
-  		motor[port1] = motor[port4] = motor[port5] = motor[port6] = vexRT[Ch3] + vexRT[Ch1];
-  		motor[port7] = motor[port8] = motor[port9] = motor[port10] = -vexRT[Ch3] + vexRT[Ch1];
-  	}
-  	if (vexRT[Btn7L]) {
-  		while(vexRT[Btn7L]){}
-  		startTask(liftFront);
+		if (driveMode) {
+			//	motor[port1] = motor[port4] = motor[port5] = motor[port6] = vexRT[Ch3] + vexRT[Ch1];
+			//	motor[port7] = motor[port8] = motor[port9] = motor[port10] = -vexRT[Ch3] + vexRT[Ch1];
+			} else {
+			motor[port1] = motor[port4] = motor[port5] = motor[port6] = vexRT[Ch3] + vexRT[Ch1];
+			motor[port7] = motor[port8] = motor[port9] = motor[port10] = -vexRT[Ch3] + vexRT[Ch1];
+		}
+		if (vexRT[Btn7L]) {
+			while(vexRT[Btn7L]){}
+			startTask(liftFront);
 			startTask(liftBack);
-  		driveMode = !driveMode;
-  	}
+			driveMode = !driveMode;
+		}
 
-  	if (nLCDButtons == 2) {
-  		leftMotor(-50);
-  		rightMotor(-50);
-  		while(nLCDButtons == 2) {}
-  		leftMotor(0);
-  		rightMotor(0);
+		if (nLCDButtons == 2) {
+			leftMotor(-50);
+			rightMotor(-50);
+			while(nLCDButtons == 2) {}
+			leftMotor(0);
+			rightMotor(0);
 
-  	}
+		}
 
-  	if (vexRT[Btn7R]) {
-  		while(vexRT[Btn7R]) {}
-  		ekinSkills();
-  	}
+		if (vexRT[Btn7R]) {
+			while(vexRT[Btn7R]) {}
+			legitSkills();
+		}
 
-  	if (nLCDButtons == 4) {
-  		SensorValue[encoderLeft] = 0;
-  		SensorValue[encoderRight] = 0;
-  	}
+		if (nLCDButtons == 4) {
+			SensorValue[encoderLeft] = 0;
+			SensorValue[encoderRight] = 0;
+		}
 
-  }
+		if(vexRT[Btn8R]){
+			startTask(frontDownDelay);
+		}
+
+
+	}
 }
